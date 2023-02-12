@@ -1,0 +1,23 @@
+package extralongs;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ExtraLongs {
+
+	public static void main(String[] args) {
+		System.out.println("Introduzca un numero de mas de 7 cifras");
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Long> numbers = new ArrayList();
+		long num = sc.nextLong();
+		while (num > 0) {
+			numbers.add(num % 10);
+			num /= 10;
+		}
+		int size = numbers.size() - 1;
+		for (int i = 0; i <= size; size--) {
+			if ((numbers.get(size) % 2) == 0)
+				System.out.print(numbers.get(size) + " ");
+		}
+	}
+}

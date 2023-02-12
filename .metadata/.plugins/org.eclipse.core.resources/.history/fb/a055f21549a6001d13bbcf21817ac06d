@@ -1,0 +1,10 @@
+package extradiezmil;
+
+public class ExtraDiezMil {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,26 @@
+package extradiezmil;
+
+import java.util.*;
+
+public class ExtraDiezMil {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int total, media, sum, count;
+		total = media = sum = count = 0;
+		int num;
+		ArrayList<Integer> numbers = new ArrayList();
+		do {
+			System.out.println("Introduzca un numero");
+			num = sc.nextInt();
+			total = num + total;
+			numbers.add(num);
+		} while (total < 10000);
+		for (int i = 0; i < (numbers.size()); i++) {
+			sum = (numbers.get(i) + sum);
+			count++;
+		}
+		media = sum / count;
+		System.out.println("El total es " + total + ", " + numbers + " y la media es: " + media);
+	}
+}

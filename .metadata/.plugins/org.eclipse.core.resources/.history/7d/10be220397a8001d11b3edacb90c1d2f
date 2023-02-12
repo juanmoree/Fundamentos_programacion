@@ -1,0 +1,35 @@
+package pruebas;
+
+import java.util.*;
+
+public class Pruebas {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		ArrayList<String> cars = new ArrayList<String>();
+		cars.add("Bentley");
+		cars.add("Ferrari");
+		cars.add("Aston Martin");
+		cars.add("Bugatti");
+		cars.add("Alfa Romeo");
+		// System.out.println(cars);
+
+		System.out.println("Introduce un coche");
+		String choose = sc.nextLine();
+		int i = 0;
+		final int size = cars.size();
+		while (i < cars.size()) {
+			if (choose.equalsIgnoreCase(cars.get(i))) {
+				cars.remove(i);
+				System.out.println("El coche ha sido vendido");
+				System.out.println(cars);
+				i = (size + 1);
+			} else
+				i++;
+		}
+		if (i == size) {
+			System.out.println("Este coche no esta en venta");
+		}
+		sc.close();
+	}
+}

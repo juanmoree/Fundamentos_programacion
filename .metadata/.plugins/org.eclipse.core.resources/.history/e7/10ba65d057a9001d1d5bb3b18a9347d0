@@ -1,0 +1,97 @@
+package extra6_1;
+
+import java.util.*;
+
+public class Extra6_1 {
+
+	public static void method1() {
+		System.out.println("Soy un metodo");
+	}
+
+	public static int method2(ArrayList<Integer> numbers) {
+		int i = 0;
+		int size = numbers.size();
+		int max, min;
+		max = min = 0;
+
+		while (i < size) {
+
+			// Find max
+			int actual = numbers.get(i);
+			if (i != (size - 1)) {
+				int forw = numbers.get(i + 1);
+				if (actual > forw && actual > max)
+					max = actual;
+				else if (forw > max)
+					max = forw;
+			}
+
+			// Find min
+			if (i != 0) {
+				int backw = numbers.get(i - 1);
+				if (actual < backw && actual < min && min != 0)
+					min = actual;
+				else if (actual < backw)
+					min = actual;
+			}
+			i++;
+		}
+		System.out.println("Numero mas grande: " + max);
+		return min;
+	}
+
+	public static int method3(ArrayList<String> names) {
+		ArrayList<Integer> length = new ArrayList();
+		int size = names.size();
+
+		// Create length's array index
+		for (int i = 0; i < size; i++) {
+			length.add(names.get(i).length());
+		}
+
+		int i = 0;
+		int maxindex = 0;
+
+		// Loop through new array of indexes
+		while (i < size) {
+
+			// Find max
+			int actual = length.get(i);
+			if (i != (size - 1)) {
+				int forw = length.get(i + 1);
+				if (actual > forw)
+					maxindex = i;
+				else if (forw > actual)
+					maxindex = (i + 1);
+			}
+			i++;
+		}
+		return maxindex;
+	}
+
+	public static void main(String[] args) {
+
+		ArrayList<Integer> nums = new ArrayList();
+		nums.add(8);
+		nums.add(12);
+		nums.add(5);
+		nums.add(22);
+		nums.add(6);
+
+		ArrayList<String> names = new ArrayList();
+		names.add("Noa");
+		names.add("Peter");
+		names.add("Victoria");
+		names.add("Dani");
+		names.add("Sara");
+
+		System.out.println("****METODO 1*****");
+		method1();
+		System.out.println("****METODO 2*****");
+		System.out.println("Numero mas pequeño: " + method2(nums));
+		System.out.println("****METODO 3*****");
+		System.out.println(names + "\nNombre mas largo: " + names.get(method3(names)));
+
+	}
+
+}

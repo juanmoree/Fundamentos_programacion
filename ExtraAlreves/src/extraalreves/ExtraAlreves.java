@@ -8,7 +8,6 @@ public class ExtraAlreves {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un numero mayor a 9999");
 		int num = sc.nextInt();
-		int left;
 		if (num <= 9999)
 			System.out.println("Numero incorrecto");
 		else {
@@ -17,5 +16,6 @@ public class ExtraAlreves {
 				num /= 10;
 			}
 		}
+		sc.close();
 	}
 }

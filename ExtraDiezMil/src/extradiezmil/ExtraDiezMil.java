@@ -9,7 +9,7 @@ public class ExtraDiezMil {
 		int total, sum, count, num;
 		total = sum = count = 0;
 		float media;
-		ArrayList<Integer> numbers = new ArrayList();
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
 		System.out.println("Vamos a sumar a partir de 10000.");
 		do {
 			System.out.println("Introduzca un numero:");
@@ -24,5 +24,6 @@ public class ExtraDiezMil {
 		media = (float) sum / count;
 		System.out.println(
 				"El total es " + total + ", los numeros introducidos son: " + numbers + " y la media es: " + media);
+		sc.close();
 	}
 }

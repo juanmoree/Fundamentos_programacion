@@ -8,7 +8,7 @@ public class ExtraLongs {
 	public static void main(String[] args) {
 		System.out.println("Introduzca un numero de mas de 7 cifras");
 		Scanner sc = new Scanner(System.in);
-		ArrayList<Long> numbers = new ArrayList();
+		ArrayList<Long> numbers = new ArrayList<Long>();
 		long num = sc.nextLong();
 		long sum = 0;
 		if (num > 9999999) {
@@ -23,11 +23,12 @@ public class ExtraLongs {
 				if ((numbers.get(size) % 2) == 0) {
 					// Obtiene los numeros de derecha a izquierda
 					System.out.print(numbers.get(size) + " ");
-					sum = numbers.get(size) + sum;
+					sum += numbers.get(size);
 				}
 			}
 			System.out.println("\nY la suma de ellos es: " + sum);
 		} else
 			System.out.println("Numero incorrecto");
+		sc.close();
 	}
 }

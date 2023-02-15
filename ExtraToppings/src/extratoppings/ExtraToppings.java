@@ -42,5 +42,6 @@ public class ExtraToppings {
 			System.out.println("El precio de su helado es " + result + "€");
 		} else
 			System.out.println("No tenemos ese topping, lo sentimos");
+		sc.close();
 	}
 }

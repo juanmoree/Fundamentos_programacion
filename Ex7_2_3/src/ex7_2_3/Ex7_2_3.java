@@ -1,8 +1,8 @@
-package pruebas;
+package ex7_2_3;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Pruebas {
+public class Ex7_2_3 {
 
 	public static void main(String[] args) {
 		System.out.println("Introduzca un numero");

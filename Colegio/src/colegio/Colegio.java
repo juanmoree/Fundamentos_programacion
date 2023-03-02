@@ -8,13 +8,13 @@ public class Colegio {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		ArrayList<Alumnos> alumni = new ArrayList<Alumnos>();
+		ArrayList<Alumno> alumni = new ArrayList<Alumno>();
 
 		System.out.println("Introduzca el dni");
 		String dni = sc.nextLine();
 
-		Alumnos alumno1 = new Alumnos("87896543H");
-		Alumnos alumno2 = new Alumnos("Pedro", "Perez", "26329384K", 20);
+		Alumno alumno1 = new Alumno("87896543H");
+		Alumno alumno2 = new Alumno("Pedro", "Perez", "26329384K", 20);
 
 		alumno1.setName("Juan");
 		alumno1.setLastName("Moreno");
@@ -25,7 +25,7 @@ public class Colegio {
 
 		if (createAlumn(alumni, dni) == true) {
 			System.out.println("Dni no encontrado, puedes continuar");
-			Alumnos alumno3 = new Alumnos(dni);
+			Alumno alumno3 = new Alumno(dni);
 			System.out.println("Introduzca el nombre");
 			String name = sc.nextLine();
 			alumno3.setName(name);
@@ -44,7 +44,7 @@ public class Colegio {
 
 	}
 
-	private static boolean createAlumn(ArrayList<Alumnos> alumni, String dni) {
+	private static boolean createAlumn(ArrayList<Alumno> alumni, String dni) {
 		boolean ok = true;
 		int i = 0;
 

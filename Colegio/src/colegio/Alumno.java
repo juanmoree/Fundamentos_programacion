@@ -1,6 +1,6 @@
 package colegio;
 
-public class Alumnos {
+public class Alumno {
 	
 	// Attributes
 	
@@ -12,11 +12,11 @@ public class Alumnos {
 	
 	//Constructor
 	
-	public Alumnos(String dni) {
+	public Alumno(String dni) {
 		this.dni = dni;
 	}
 	
-	public Alumnos(String name, String lastName, String dni, int age) {
+	public Alumno(String name, String lastName, String dni, int age) {
 		this.name = name;
 		this.lastName = lastName;
 		this.dni = dni;
@@ -51,7 +51,7 @@ public class Alumnos {
 	
 	@Override
 	public String toString() {
-		return "Alumnos [name=" + name + ", lastName=" + lastName + ", dni=" + dni + ", age=" + age + "]";
+		return "Alumno [name=" + name + ", lastName=" + lastName + ", dni=" + dni + ", age=" + age + "]";
 	}
 	
 	

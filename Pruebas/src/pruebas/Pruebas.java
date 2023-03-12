@@ -4,25 +4,31 @@ import java.util.*;
 
 public class Pruebas {
 
-	public static void main(String[] args) {
-		System.out.println("Introduzca un numero");
+	public static void main(String[] argh) {
+		Scanner in = new Scanner(System.in);
+		int t = in.nextInt();
 
-		Scanner sc = new Scanner(System.in);
-		int num = sc.nextInt();
-		String asterisk = "";
-		char c = '*';
-		
-		for (int i = 0; i < num; i++) {
-			asterisk += c;
-			System.out.println(asterisk);
-		}
-		
-		for (int j = 0; j < num; j++) {
-			for (int k = num - 1; k > j; k--) {
-				System.out.print(c);
+		for (int i = 0; i < t; i++) {
+			int a = in.nextInt();
+			int b = in.nextInt();
+			int n = in.nextInt();
+			int mult = 1;
+			int total = 0;
+			ArrayList<Integer> prin = new ArrayList<Integer>();
+			total = a + (1 * b);
+			for (int j = 1; j <= n; j++) {
+				prin.add(total);
+				mult = mult * 2;
+				total = total + (mult * b);
+			}
+			for (int k = 0; k < n; k++) {
+				System.out.print(prin.get(k) + " ");
 			}
 			System.out.println();
+			prin.clear();
+
+			
 		}
-		sc.close();
+		in.close();
 	}
 }

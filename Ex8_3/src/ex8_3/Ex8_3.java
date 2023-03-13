@@ -9,14 +9,6 @@ public class Ex8_3 {
 	public static void main(String[] args) {
 
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-		Cliente cliente1 = new Cliente("Juan", "Moreno");
-		Cliente cliente2 = new Cliente("Kathe", "Moreno");
-		Cliente cliente3 = new Cliente("Luis", "Moreno");
-		Cliente cliente4 = new Cliente("Janeth", "Ceballos");
-		clientes.add(cliente1);
-		clientes.add(cliente2);
-		clientes.add(cliente3);
-		clientes.add(cliente4);
 
 		boolean salir = false;
 		do {
@@ -35,12 +27,10 @@ public class Ex8_3 {
 				crearCuenta(clientes);
 				break;
 			case 4:
-				System.out.println("Escriba la cantidad a ingresar");
-				int ingresarCant = sc.nextInt();
+				ingresarDinero(clientes);
 				break;
 			case 5:
-				System.out.println("Escriba la cantidad a retirar");
-				int retirarCant = sc.nextInt();
+				retirarDinero(clientes);
 				break;
 			case 0:
 				System.out.println("Gracias por utilizar la aplicación");
@@ -48,6 +38,62 @@ public class Ex8_3 {
 				break;
 			}
 		} while (!salir);
+		// System.out.println(cliente1.getCuentas());
+	}
+
+	private static void retirarDinero(ArrayList<Cliente> clientes) {
+		System.out.println("Ingrese nombre");
+		String nombre = sc.nextLine();
+		System.out.println("Ingrese apellido");
+		String apellido = sc.nextLine();
+		Cliente cliente = busqueda(clientes, nombre, apellido);
+
+		if (cliente == null) {
+			System.out.println("No pudimos encontrar ese cliente");
+		} else {
+			System.out.println("Ingrese numero de cuenta");
+			int numCuenta = sc.nextInt();
+			sc.nextLine();
+			Cuenta cuenta = busquedaCuenta(numCuenta, cliente.getCuentas());
+
+			if (cuenta == null) {
+				System.out.println(
+						"El cliente: " + cliente + " no tiene asociada ninguna cuenta con el numero: " + numCuenta);
+			} else {
+				System.out.println("Introduzca la cantidad a retirar:");
+				int cantidad = sc.nextInt();
+				cuenta.retirar(cantidad);
+			}
+		}
+
+	}
+
+	private static void ingresarDinero(ArrayList<Cliente> clientes) {
+		System.out.println("Ingrese nombre");
+		String nombre = sc.nextLine();
+		System.out.println("Ingrese apellido");
+		String apellido = sc.nextLine();
+		Cliente cliente = busqueda(clientes, nombre, apellido);
+
+		if (cliente == null) {
+			System.out.println("No pudimos encontrar ese cliente");
+		} else {
+			System.out.println("Ingrese numero de cuenta");
+			int numCuenta = sc.nextInt();
+			sc.nextLine();
+			Cuenta cuenta = busquedaCuenta(numCuenta, cliente.getCuentas());
+
+			if (cuenta == null) {
+				System.out.println(
+						"El cliente: " + cliente + " no tiene asociada ninguna cuenta con el numero: " + numCuenta);
+			} else {
+				System.out.println("Introduzca la cantidad a ingresar:");
+				int cantidad = sc.nextInt();
+				cuenta.ingresar(cantidad);
+				System.out.println(cantidad + " Ingresados en la " + cuenta);
+			}
+		}
+
 	}
 
 	private static void crearCuenta(ArrayList<Cliente> clientes) {
@@ -61,31 +107,34 @@ public class Ex8_3 {
 		if (cliente != null) {
 			System.out.println("Ingrese numero de cuenta");
 			int numCuenta = sc.nextInt();
-			Cuenta cuenta = busquedaCuenta(cliente, numCuenta);
+
+			Cuenta cuenta = busquedaCuenta(numCuenta, cliente.getCuentas());
+
+			// Si no existe la cuenta
 			if (cuenta == null) {
 				cuenta = new Cuenta(numCuenta);
+				// cliente.getCuentas().add(cuenta);
 				cliente.agregarCuenta(cliente.getCuentas(), numCuenta);
-			}
+				System.out.println("Cuenta: " + numCuenta + " creada exitosamente");
+			} else
+				System.out.println("La cuenta: " + numCuenta + " ya está asociada al " + cliente);
+		} else {
+			System.out.println("El cliente " + nombre + " " + apellido + " no existe");
 		}
-		System.out.println(cliente.getCuentas());
 	}
 
-	private static Cuenta busquedaCuenta(Cliente cliente, int numCuenta) {
+	private static Cuenta busquedaCuenta(int numCuenta, ArrayList<Cuenta> cuentas) {
 		Cuenta cuenta = null;
 		int i = 0;
 		boolean encontrada = false;
-		if (cliente.getCuentas() == null) {
-			cliente.agregarCuenta(cliente.getCuentas(), numCuenta);
-		}
-		if (cliente.getCuentas().size() != 0) {
-			while (!encontrada && i < cliente.getCuentas().size()) {
-				if (cliente.getCuentas().get(i).getNumCuenta() == numCuenta) {
-					System.out.println("La cuenta: " + numCuenta + " ya está asociada al cliente: " + cliente);
-					cuenta = cliente.getCuentas().get(i);
-					encontrada = true;
-				} else {
-					i++;
-				}
+		int size = cuentas.size();
+
+		while (!encontrada && i < size) {
+			if (numCuenta == cuentas.get(i).getNumCuenta()) {
+				cuenta = cuentas.get(i);
+				encontrada = true;
+			} else {
+				i++;
 			}
 		}
 		return cuenta;

@@ -6,7 +6,7 @@ public class Cuenta {
 	private int saldo;
 	
 	public Cuenta(int numCuenta) {
-		numCuenta = this.getNumCuenta();
+		this.numCuenta = numCuenta;
 	}
 
 	public int getNumCuenta() {
@@ -25,6 +25,7 @@ public class Cuenta {
 	public int retirar(int cantidad) {
 		if (cantidad <= saldo) {
 			saldo -= cantidad;
+			System.out.println(cantidad + " retirados de la cuenta");
 		} else {
 			System.out.println("Saldo insuficiente");
 		}

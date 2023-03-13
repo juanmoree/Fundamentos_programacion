@@ -6,22 +6,12 @@ public class Cliente {
 
 	private String nombre;
 	private String apellido;
-	// Preguntar si se puede inicializar
 	private ArrayList<Cuenta> cuentas;
-
-	public Cliente(ArrayList<Cuenta> cuentas) {
-		this.cuentas = new ArrayList<>();
-	}
-
-	public Cliente(String nombre, String apellido, ArrayList<Cuenta> cuentas) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cuentas = cuentas;
-	}
 
 	public Cliente(String nombre, String apellido) {
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.cuentas = new ArrayList<>();
 	}
 
 	public String getNombre() {
@@ -45,11 +35,8 @@ public class Cliente {
 	}
 
 	public void agregarCuenta(ArrayList<Cuenta> cuentas, int numCuenta) {
-		// cuentas = new ArrayList<Cuenta>();
-		// Cuenta cuenta1 = new Cuenta(numCuenta);
-		if (this.cuentas == null) {
+		if (cuentas == null) {
 			Cuenta cuenta1 = new Cuenta(numCuenta);
-			cuentas = new ArrayList<>();
 			cuentas.add(cuenta1);
 		} else {
 			cuentas.add(new Cuenta(numCuenta));

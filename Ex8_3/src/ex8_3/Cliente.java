@@ -34,6 +34,7 @@ public class Cliente {
 		return cuentas;
 	}
 
+	@SuppressWarnings("null")
 	public void agregarCuenta(ArrayList<Cuenta> cuentas, int numCuenta) {
 		if (cuentas == null) {
 			Cuenta cuenta1 = new Cuenta(numCuenta);

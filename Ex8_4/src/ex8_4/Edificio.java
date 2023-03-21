@@ -3,29 +3,29 @@ package ex8_4;
 public abstract class Edificio {
 	
 	protected String nombre;
-	protected int numeroPlantas;
-	protected int superficie;
+	protected static int numeroPlantas;
+	protected static int superficie;
 	
 	public Edificio(String nombre, int numeroPlantas, int superficie) {
 		this.nombre = nombre;
-		this.numeroPlantas = numeroPlantas;
-		this.superficie = superficie;
+		Edificio.numeroPlantas = numeroPlantas;
+		Edificio.superficie = superficie;
 	}
 	
 	public String getNombre() {
 		return nombre;
 	}
-	public int getNumPlantas() {
+	public static int getNumPlantas() {
 		return numeroPlantas;
 	}
-	public int getSuperficie() {
+	public static int getSuperficie() {
 		return superficie;
 	}
 
 	abstract void calcularCosteVigilancia(int superficie);
 	
 	protected float limpiar(int superficie, int numPlantas) {
-		this.superficie = superficie;
+		Edificio.superficie = superficie;
 		float minutos = 0;
 		minutos += superficie / 5;
 		if (numPlantas > 1) {

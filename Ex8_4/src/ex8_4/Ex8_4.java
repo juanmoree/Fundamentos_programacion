@@ -17,8 +17,6 @@ public class Ex8_4 {
 		edificios.add(hospital1);
 		edificios.add(cine1);
 
-		ArrayList<Integer> datos;
-
 		boolean salir = false;
 		do {
 			switch (menu()) {
@@ -28,31 +26,7 @@ public class Ex8_4 {
 				System.out.println("¿Qué edificio quiere dar de alta?\n1. Hotel\n2. Hospital\n3. Cine");
 				int opcion = sc.nextInt();
 				sc.nextLine();
-				Edificio edificio = busqueda(edificios, opcion, nombre);
-				if (edificio == null)
-					switch (opcion) {
-					case 1:
-						datos = datosEdificio();
-						System.out.println("Ingrese número de habitaciones");
-						int habitaciones = sc.nextInt();
-						Hotel hotel = new Hotel(nombre, datos.get(0), datos.get(1), habitaciones);
-						edificios.add(hotel);
-						break;
-					case 2:
-						datos = datosEdificio();
-						System.out.println("Ingrese número de pacientes");
-						int pacientes = sc.nextInt();
-						Hospital hospital = new Hospital(nombre, datos.get(0), datos.get(1), pacientes);
-						edificios.add(hospital);
-						break;
-					case 3:
-						datos = datosEdificio();
-						System.out.println("Ingrese aforo total");
-						int aforo = sc.nextInt();
-						Cine cine = new Cine(nombre, datos.get(0), datos.get(1), aforo);
-						edificios.add(cine);
-						break;
-					}
+				darAltaEdificio(edificios, opcion, nombre);
 				break;
 			case 2:
 				System.out.println("¿Qué tipo de edificio quiere ver?\n1. Hotel\n2. Hospital\n3. Cine");
@@ -61,42 +35,20 @@ public class Ex8_4 {
 				System.out.println("Ingrese el nombre");
 				String nombre1 = sc.nextLine();
 				Edificio edificio1 = busqueda(edificios, opcion1, nombre1);
-				if (edificio1 != null) {
-					switch (opcion1) {
-					case 1:
-						edificio1.toString();
-						Hotel.costeMantenimiento(edificio1.getSuperficie());
-						edificio1.calcularCosteVigilancia(edificio1.getSuperficie());
-						edificio1.limpiar(edificio1.getSuperficie(), edificio1.getNumPlantas());
-						break;
-					case 2:
-						edificio1.toString();
-						Hospital.repartirAlmuerzo();
-						edificio1.calcularCosteVigilancia(edificio1.getSuperficie());
-						edificio1.limpiar(edificio1.getSuperficie(), edificio1.getNumPlantas());
-						break;
-					case 3:
-						edificio1.toString();
-						System.out.println("Introduzca el precio de entrada");
-						float precioEntrada = sc.nextFloat();
-						System.out.println("Introduzca el número de asistentes");
-						int asistentes = sc.nextInt();
-						sc.nextLine();
-						edificio1.limpiar(edificio1.getSuperficie(), edificio1.getNumPlantas());
-						edificio1.calcularCosteVigilancia(edificio1.getSuperficie());
-						Cine.proyectarSesion(precioEntrada, asistentes);
-						break;
-					}
+				if (edificio1 == null) {
+					System.out.println("No existe el edificio con el nombre " + nombre1);
+				} else {
+					mostrarEdificio(edificios, edificio1);
 				}
 				break;
 			case 3:
-				// eliminarEdificio();
+				System.out.println("Elija el tipo de edificio a eliminar:\n1. Hotel\n2. Hospital\n3. Cine");
+				int opcion2 = sc.nextInt();
+				sc.nextLine();
+				eliminarEdificio(edificios, opcion2);
 				break;
 			case 4:
-				// ingresarDinero(clientes);
-				break;
-			case 5:
-				// retirarDinero(clientes);
+				mostrarEdificios(edificios);
 				break;
 			case 0:
 				System.out.println("Gracias por utilizar la aplicación");
@@ -106,6 +58,99 @@ public class Ex8_4 {
 		} while (!salir);
 		System.out.println(edificios);
 
+	}
+
+	public static void darAltaEdificio(ArrayList<Edificio> edificios, int opcion, String nombre) {
+		ArrayList<Integer> datos;
+		Edificio edificio = busqueda(edificios, opcion, nombre);
+		if (edificio == null)
+			switch (opcion) {
+			case 1:
+				datos = datosEdificio();
+				System.out.println("Ingrese número de habitaciones");
+				int habitaciones = sc.nextInt();
+				Hotel hotel = new Hotel(nombre, datos.get(0), datos.get(1), habitaciones);
+				edificios.add(hotel);
+				break;
+			case 2:
+				datos = datosEdificio();
+				System.out.println("Ingrese número de pacientes");
+				int pacientes = sc.nextInt();
+				Hospital hospital = new Hospital(nombre, datos.get(0), datos.get(1), pacientes);
+				edificios.add(hospital);
+				break;
+			case 3:
+				datos = datosEdificio();
+				System.out.println("Ingrese aforo total");
+				int aforo = sc.nextInt();
+				Cine cine = new Cine(nombre, datos.get(0), datos.get(1), aforo);
+				edificios.add(cine);
+				break;
+			}
+		System.out.println("Hemos dado de alta el edificio " + nombre);
+	}
+
+	private static void mostrarEdificio(ArrayList<Edificio> edificios, Edificio edificio1) {
+		edificio1.toString();
+		edificio1.calcularCosteVigilancia(edificio1.getSuperficie());
+		edificio1.limpiar(edificio1.getSuperficie(), edificio1.getNumPlantas());
+		if (edificio1 instanceof Hotel) {
+			Hotel.costeMantenimiento(edificio1.getSuperficie());
+		} else if (edificio1 instanceof Hospital) {
+			Hospital.repartirAlmuerzo();
+		} else {
+			System.out.println("Introduzca el precio de entrada");
+			float precioEntrada = sc.nextFloat();
+			System.out.println("Introduzca el número de asistentes");
+			int asistentes = sc.nextInt();
+			sc.nextLine();
+			Cine.proyectarSesion(precioEntrada, asistentes);
+		}
+	}
+	
+	private static void eliminarEdificio(ArrayList<Edificio> edificios, int opcion) {
+		System.out.println("Introduzca el nombre del edificio a dar de baja");
+		String nombre = sc.nextLine();
+		System.out.print("Confirmación: ");
+		Edificio edificio = busqueda(edificios, opcion, nombre);
+
+		if (edificio != null) {
+			if (edificio instanceof Hotel) {
+				edificios.remove(edificio);
+				System.out.println("Hemos eliminado correctamente el Hotel " + nombre);
+			} else if (edificio instanceof Hospital) {
+				edificios.remove(edificio);
+				System.out.println("Hemos eliminado correctamente el Hospital " + nombre);
+			} else {
+				edificios.remove(edificio);
+				System.out.println("Hemos eliminado correctamente el Cine " + nombre);
+			}
+
+		} else {
+			if (opcion == 1) {
+				System.out.println("No existe un Hotel con el nombre " + nombre);
+			} else if (opcion == 2) {
+				System.out.println("No existe un Hospital con el nombre " + nombre);
+			} else {
+				System.out.println("No existe un Cine con el nombre " + nombre);
+			}
+		}
+	}
+	
+	private static void mostrarEdificios(ArrayList<Edificio> edificios) {
+
+		for (Edificio edificio : edificios) {
+			System.out.print(edificio.toString());
+			edificio.calcularCosteVigilancia(Edificio.getSuperficie());
+			edificio.limpiar(Edificio.getSuperficie(), Edificio.getNumPlantas());
+			if (edificio instanceof Hotel) {
+				Hotel.costeMantenimiento(((Hotel) edificio).getNumHabitaciones());
+			} else if (edificio instanceof Hospital) {
+				Hospital.repartirAlmuerzo();
+			} else {
+				Cine.proyectarSesion(5, 100);
+			}
+		}
 	}
 
 	private static ArrayList<Integer> datosEdificio() {
@@ -181,7 +226,7 @@ public class Ex8_4 {
 		if (edificios.size() != 0) {
 			while (!encontrado && i < edificios.size()) {
 				if (edificios.get(i) instanceof Hotel && edificios.get(i).nombre.equalsIgnoreCase(nombre)) {
-					System.out.println("El Hotel: " + nombre + " está dado de alta");
+					System.out.println("El Hotel " + nombre + " está dado de alta");
 					edificio = edificios.get(i);
 					encontrado = true;
 				} else {
@@ -195,15 +240,14 @@ public class Ex8_4 {
 	public static byte menu() {
 		byte opcion;
 		final byte MINIMO = 0;
-		final byte MAXIMO = 5;
+		final byte MAXIMO = 4;
 
 		do {
 			System.out.println("\nMENú PRINCIPAL");
 			System.out.println("1. Dar de alta edificio.");
-			System.out.println("2. Mostrar edificios.");
+			System.out.println("2. Mostrar edificio.");
 			System.out.println("3. Eliminar edificios.");
-			System.out.println("4. Ingresar euros en cuenta de cliente.");
-			System.out.println("5. Retirar euros de cuenta de cliente.");
+			System.out.println("4. Mostrar edificios.");
 			System.out.println("0. Salir de la aplicación.\n");
 			opcion = sc.nextByte();
 			sc.nextLine();

@@ -2,7 +2,7 @@ package ex8_6;
 
 public class Mecanico extends Trabajador {
 	private boolean tieneEstudio;
-	
+
 	public Mecanico(String nombre, String apellido, int edad) {
 		super(nombre, apellido, edad);
 	}
@@ -29,6 +29,6 @@ public class Mecanico extends Trabajador {
 
 	@Override
 	public String toString() {
-		return "Mecanico [tieneEstudio=" + tieneEstudio + "]";
+		return "Mecanico " + super.nombre + " " + super.apellido + "[tieneEstudio=" + tieneEstudio + "]";
 	}
 }

@@ -7,9 +7,7 @@ public class Escuderia {
 	private int presupuesto;
 	private String pais;
 	private ArrayList<Coche> coches;
-	private ArrayList<Trabajador> trabajadores;
-	
-	
+	protected ArrayList<Trabajador> trabajadores;
 	
 	public Escuderia(String nombre, int presupuesto, String pais) {
 		this.nombre = nombre;
@@ -18,6 +16,7 @@ public class Escuderia {
 		this.coches = new ArrayList<>();
 		this.trabajadores = new ArrayList<>();
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
